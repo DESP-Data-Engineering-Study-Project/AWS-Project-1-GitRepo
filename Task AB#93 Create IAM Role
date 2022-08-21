@@ -1,0 +1,33 @@
+# Create json file with Glue service policies in C:\policies name as trustpolicyforacct297392256981.json
+
+{
+
+    "Version": "2012-10-17",
+
+    "Statement": [
+
+        {
+
+            "Effect": "Allow",
+
+            "Principal": {
+
+                "Service": "glue.amazonaws.com"
+
+            },
+
+            "Action": "sts:AssumeRole"
+
+        }
+
+    ]
+
+}
+
+# Add role 
+
+  aws iam create-role --role-name dojocrawlerrole  --assume-role-policy-document file://C:\policies\trustpolicyforacct297392256981.json
+
+# Attach policies to the role 
+
+aws iam attach-role-policy --role-name dojocrawlerrole --policy-arn arn:aws:iam::aws:policy/PowerUserAccess
