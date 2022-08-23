@@ -1,1 +1,2 @@
-
+# Create bucket
+aws s3api create-bucket --bucket dojodatalake --region eu-west-3 --create-bucket-configuration LocationConstraint=eu-west-3
