@@ -1,0 +1,2 @@
+# Create database
+aws glue create-database --database-input "{\"Name\":\"dojodb\", \"Description\":\"This database is created using AWS CLI\"}"
