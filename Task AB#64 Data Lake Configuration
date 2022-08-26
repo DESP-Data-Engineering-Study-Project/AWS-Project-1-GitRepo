@@ -1,4 +1,4 @@
 # Create database
 aws glue create-database --database-input "{\"Name\":\"dojodb\", \"Description\":\"This database is created using AWS CLI\"}" --region "eu-west-3"
-# Register location
-aws lakeformation register-resource --resource-arn arn:aws:s3:::dojodatalake/data/ --use-service-linked-role AWSServiceRoleForLakeFormationDataAccess 
+# Register location & add default service role;- AWSServiceRoleForLakeFormationDataAccess
+aws lakeformation register-resource --resource-arn arn:aws:s3:::dojodatalake/data/ --use-service-linked-role 
