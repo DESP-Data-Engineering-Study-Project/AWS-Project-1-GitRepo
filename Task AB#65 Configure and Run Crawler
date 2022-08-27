@@ -1,1 +1,6 @@
 # Grant specific role permission to datbase 
+
+aws lakeformation grant-permissions --principal DataLakePrincipalIdentifier=arn:aws:iam::297392256981:role/dojocrawlerrole 
+--permissions "CREATE_TABLE" --resource '{ "Database": {"Name":"dojodb"}}'
+
+lakeformation list-permissions --resource-type TABLE --resource '{ "Table":{"DatabaseName":"dojodb", "Name":"alexa-logs", "CatalogId":"297392256981"}}'
