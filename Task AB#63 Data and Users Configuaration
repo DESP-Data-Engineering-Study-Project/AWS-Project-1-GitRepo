@@ -1,0 +1,42 @@
+# Login to AWS Console using "datalake_user". Select an AWS Region where AWS Lake Formation is available. The workshop is using the Paris region.
+# https://297392256981.signin.aws.amazon.com/console
+ aws configure
+
+ AWS Access Key ID [None]: AKIAUKPPVW7K5OU7WXJW
+ AWS Secret Access Key [None]: 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
+ Default region name [None]: eu-west-3
+ Default output format [None]: json
+
+# Create SALESUSER & Password.
+aws iam create-user --user-name salesuser
+aws iam create-login-profile --user-name salesuser--password Login@123
+
+# Check and assign following user policies for SALES user.
+# AmazonS3FullAccess, AmazonAthenaFullAccess, CloudWatchLogsReadOnlyAccess, AWSCloudFormationReadOnlyAccess, AWSGlueConsoleFullAccess
+
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --user-name salesuser
+aws iam attach-user-policy --policy-arn 
+arn:aws:iam::aws:policy/AmazonAthenaFullAccess --user-name salesuser
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess --user-name salesuser
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AWSCloudFormationReadOnlyAccess --user-name salesuser
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess --user-name salesuser
+
+# Check list of assign policies. 
+aws iam list-attached-user-policies --user-name salesuser
+
+# Create CUSTOMERUSER & Password
+
+aws iam create-user --user-name customeruser
+aws iam create-login-profile --user-name customeruser --password Login@123
+
+# Check and assign user assign following user policies for CUSTOMERUSER 
+# AmazonS3FullAccess, AmazonAthenaFullAccess, CloudWatchLogsReadOnlyAccess, AWSCloudFormationReadOnlyAccess, AWSGlueConsoleFullAccess
+
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --user-name customeruser
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AmazonAthenaFullAccess --user-name customeruser
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess --user-name customeruser
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AWSCloudFormationReadOnlyAccess --user-name customeruser
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess --user-name customeruser
+
+# Check list of assign policies. 
+aws iam list-attached-user-policies --user-name customeruser

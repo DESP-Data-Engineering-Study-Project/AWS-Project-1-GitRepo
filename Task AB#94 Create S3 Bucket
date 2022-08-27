@@ -1,0 +1,154 @@
+# Create bucket
+aws s3api create-bucket --bucket dojodatalake --region eu-west-3 --create-bucket-configuration LocationConstraint=eu-west-3
+
+# List of bucket
+aws s3api list-buckets
+
+#  Create two folder sales and customer and upload sales and customer data 
+
+aws s3 cp “C:\users\sales.csv” s3://dojodatalake/data/sales/
+aws s3 cp “C:\users\customers.csv” s3://dojodatalake/data/customer/
+
+# Delete sales and customer data 
+aws s3 rm s3://dojodatalake/data/sales/sales.csv
+aws s3 rm s3://dojodatalake/data/customer/customers.csv
+
+# Delete bucket
+aws s3api delete-bucket --bucket dojodatalake --region eu-west-3
+
+
+# 1 List buckets (user policy)
+
+{
+	"Version": "2012-10-17", 
+	"Statement":[
+		{
+			"Sid": "AllowGroupToSeeBucketListInTheConsole",
+			"Action": ["s3:ListAllMyBuckets"], 
+			"Effect": "Allow", 
+			"Resource": ["arn:aws:s3:::*"]
+		}
+	]
+}
+
+
+# 2 See root-level bucket items (user policy)
+
+{
+	"Version": "2012-10-17", 
+	"Statement": [
+		{
+			"Sid": "AllowGroupToSeeBucketListAndAlsoAllowGetBucketLocationRequiredForListBucket", 
+			"Action": [ "s3:ListAllMyBuckets", "s3:GetBucketLocation" ], 
+			"Effect": "Allow", 
+			"Resource": [ "arn:aws:s3:::*" ]
+		},
+		{
+			"Sid": "AllowRootLevelListingOfCompanyBucket", 
+			"Action": ["s3:ListBucket"], 
+			"Effect": "Allow", 
+			"Resource": ["arn:aws:s3:::YOURBUCKETNAME"], 
+			"Condition":{ 
+				"StringEquals":{
+					"s3:prefix":[""], "s3:delimiter":["/"]
+			}
+				}
+		}
+	]
+}
+
+# 3 View the Department folder contents (user policy)
+
+{
+	"Version": "2012-10-17", 
+	"Statement": [
+		{
+			"Sid": "AllowGroupToSeeBucketListAndAlsoAllowGetBucketLocationRequiredForListBucket", 
+			"Action": [ "s3:ListAllMyBuckets", "s3:GetBucketLocation" ], 
+			"Effect": "Allow", 
+			"Resource": [ "arn:aws:s3:::*" ]
+		},
+		{
+			"Sid": "AllowRootLevelListingOfCompanyBucket", 
+			"Action": ["s3:ListBucket"], 
+			"Effect": "Allow", 
+			"Resource": ["arn:aws:s3:::YOURBUCKETNAME"], 
+			"Condition":{ 
+				"StringEquals":{
+					"s3:prefix":[""], "s3:delimiter":["/"]
+			}
+				}
+		},
+		{
+		"Sid": "AllowListBucketIfSpecificPrefixIsIncludedInRequest", 
+		"Action": ["s3:ListBucket"], 
+		"Effect": "Allow", 
+		"Resource": ["arn:aws:s3:::YOURBUCKETNAME"],
+		"Condition":{ "StringLike":{"s3:prefix":["Department/*"]}
+		}
+	}
+	]
+}
+
+# 4 Get and put objects in the Department folder (user policy)
+
+{
+	"Version": "2012-10-17", 
+	"Statement":[
+	{
+		"Sid": "AllowGroupToSeeBucketListAndAlsoAllowGetBucketLocationRequiredForListBucket", 
+		"Action": [ "s3:ListAllMyBuckets", "s3:GetBucketLocation" ], 
+		"Effect": "Allow", 
+		"Resource": [ "arn:aws:s3:::*" ]
+	},
+	{
+		"Sid": "AllowRootLevelListingOfCompanyBucket", 
+		"Action": ["s3:ListBucket"], 
+		"Effect": "Allow", 
+		"Resource": ["arn:aws:s3:::YOURBUCKETNAME"], 
+		"Condition":{ 
+			"StringEquals":{
+				"s3:prefix":[""], "s3:delimiter":["/"]
+		}
+			}
+	},
+	{
+		"Sid":"AllowListBucketIfSpecificPrefixIsIncludedInRequest", "Action":["S3:ListBucket"], 
+		"Effect":"Allow", 
+		"Resource": ["arn:aws:s3:::YOURBUCKETNAME"], 
+		"Condition":{
+			"StringLike":{"s3:prefix":["Department/*"]
+			}
+		}
+	},
+{
+		"Sid":"AllowUserToReadWriteObjectDataInDepartmentFolder", 
+		"Action":["s3:GetObject", "s3:PutObject"], 
+		"Effect":"Allow", 
+		"Resource":["arn:aws:s3:::YOURBUCKETNAME/Department/*"]
+	}
+	]
+}
+
+# 5 Explicitly grant access to Paul to list the Confidential folder (Bucket Policy) - use with policy 2 above
+
+{
+	"Version": "2012-10-17", 
+	"Id": "Policy1561964929358", 
+	"Statement":[
+	{
+		"Sid": "Stmt1561964454052", 
+		"Effect": "Allow", 
+		"Principal": {
+			"AWS": "arn:aws:iam::138422235973:user/Paul"
+		},
+		"Action": "s3:*", 
+		"Resource": "arn:aws:s3:::YOURBUCKETNAME",
+		"Condition": {
+			"StringLike": {
+				"s3:prefix": "Confidential/*"
+			}
+		}
+	}
+	]
+}
