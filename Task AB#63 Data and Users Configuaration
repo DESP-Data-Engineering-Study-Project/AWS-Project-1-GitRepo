@@ -2,8 +2,8 @@
 # https://297392256981.signin.aws.amazon.com/console
  aws configure
 
- AWS Access Key ID [None]: AKIAUKPPVW7K5OU7WXJW
- AWS Secret Access Key [None]: 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
+ AWS Access Key ID [None]: 
+ AWS Secret Access Key [None]: 
  Default region name [None]: eu-west-3
  Default output format [None]: json
 
