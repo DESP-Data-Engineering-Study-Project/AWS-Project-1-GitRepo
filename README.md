@@ -92,4 +92,32 @@ Follow the below step to deploy this pattern using CloudFormation template file 
     *aws s3 cp “C:\users\<**DataSource_Name**>” s3://dojodatalake/data/<**DataSource_Folder_Name**>/
     
     *aws s3 cp “C:\users\<**DataSource_Name**>” s3://dojodatalake/data/<**DataSource_Folder_Name**>/
+    
+ ## Test
+
+1. Once, stack deployment is completed, navigate to source folder inside S3 bucket.
+2. Upload a sample csv file( in Step 5 above) with valid schema ( sample file sales.csv is & customers.csv are attached). 
+3. Run the crawler using AWS Glue console.
+4. Once successfully run the crawler, two tables created by the crawler in dojodb database. 
+5. Go back to the AWS Lake Formation console, click on the Tables menu in the left. You can see two tables sales and customers created. 
+6. You can now login as both users one by one and check their permission on the tables in the data lake.
+5. Once logged in, make sure you choose the same region you used to setup the data lake. Then, go to Athena Service console and do the adhoc query to see result.
+
+---
+## Sample Workflow Execution and Notification
+### Successful Execution
+
+
+
+### Failed Execution with input validation error
+
+
+
+
+## Security
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+This library is licensed under the MIT-0 License. See the LICENSE file.
 
