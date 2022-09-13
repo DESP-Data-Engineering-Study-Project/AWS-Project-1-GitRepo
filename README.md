@@ -12,6 +12,7 @@ In this workshop, you will keep two data sets sales and customers in Amazon S3. 
 - [Deploy](#Deploy)
 - [Sample Workflow Execution](#Sample-Workflow-Execution-and-Notification)
 
+---
 ## Prerequisites 
 
 * An active AWS account with admin and programmatic access.
@@ -24,7 +25,7 @@ In this workshop, you will keep two data sets sales and customers in Amazon S3. 
 * AWS Athena console access.
 * AWS region Paris:- eu-west-3
 
-
+---
 ## Limitations
 AWS Lake Formation:
 
@@ -40,7 +41,7 @@ AWS Glue Crawler:
 For more details refer:
 - Issues: User is not authorized to perform: glue:CreateCrawler. 
 
-
+---
 ## Product Versions
 
 * AWS Glue version 2
@@ -48,10 +49,12 @@ For more details refer:
 * Python version 3.9.7
 * Windows 10
 
+---
 ## Architecture
 
 ![image](https://user-images.githubusercontent.com/97115457/189493451-edd28319-2480-487e-b0e1-22742b9eccdb.png)
 
+---
 ## High level work flow
 
 1. User uploads a csv file manually. The data sets are stored in Amazon S3.
@@ -65,10 +68,11 @@ For more details refer:
 9. Once logged in with respective user, make sure you choose the same region you used to setup the data lake. 
 10. Then, go to Athena Service console and query data.
 
-
+---
 # Repository Structure
 - template.yml - CloudFormation template file.
 
+---
 ## Deploy
 This pattern can be deployed through AWS CloudFormation template.
 
@@ -93,6 +97,7 @@ Follow the below step to deploy this pattern using CloudFormation template file 
     
     *aws s3 cp “C:\users\<**DataSource_Name**>” s3://dojodatalake/data/<**DataSource_Folder_Name**>/
     
+ ---        
  ## Test
 
 1. Once, stack deployment is completed, navigate to source folder inside S3 bucket.
@@ -104,20 +109,11 @@ Follow the below step to deploy this pattern using CloudFormation template file 
 5. Once logged in, make sure you choose the same region you used to setup the data lake. Then, go to Athena Service console and do the adhoc query to see result.
 
 ---
-## Sample Workflow Execution and Notification
-### Successful Execution
-
-
-
-### Failed Execution with input validation error
-
-
-
-
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
+---
 ## License
 This library is licensed under the MIT-0 License. See the LICENSE file.
 
