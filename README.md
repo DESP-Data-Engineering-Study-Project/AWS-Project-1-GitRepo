@@ -67,38 +67,28 @@ For more details refer:
 
 
 # Repository Structure
-- template.yml - CloudFormation template file
- - lambda - This folder contains the following lambda function
-    - start_crawler.py - Start the AWS Glue crawler
-    - start_codebuild.py - Start AWS CodeBuild Project
-    - s3object.py - Creates required directory structure inside S3 bucket
-
+- template.yml - CloudFormation template file.
 
 ## Deploy
 This pattern can be deployed through AWS CloudFormation template.
 
 Follow the below step to deploy this pattern using CloudFormation template file [template.yml](template.yml) included in this repository.
 
-1.	Clone the Repo
+1.	Clone the Repo.
 2.	Navigate to the Directory
-3.	Update parameter.json file as follows - 
-    - pS3BucketName - Unique bucket name. This bucket will be created to store all the dataset. As, S3 Bucket name is globally unique, provide a unique name.
-    - pEmailforNotification - A valid email address to receive success/error notification.
-    - pSourceFolder - Folder name (inside bucket created mentioned in 3.a) where source csv file will be uploaded inside 
-    - pStageFolder - Folder name (inside bucket created mentioned in 3.a) used to staging area for AWS Glue Jobs 
-    - pTransformFolder - Folder name (inside bucket created mentioned in 3.a) where transformed and portioned dataset will be stored 
-    - pArchiveFolder - Folder name (inside bucket created mentioned in 3.a) where source csv file will be archived 
-    - pErrorFolder - Folder name (inside bucket created mentioned in 3.a) where source csv file will be moved for any error 
-    - pDatasetSchema - Valid schema of the source dataset. **Note** - For source dataset validation, cerberus python package has been used. For more information, refer [cerberus site](https://cerberus-sanhe.readthedocs.io/usage.html#type)
-
-
-4. Execute the following AWS CLI command with pre-configured AWS CLI profile. 
+3. Execute the following AWS CLI command with pre-configured AWS CLI profile. 
     - Replace "Profile_Name" with a valid aws cli profile name
     - Replace "Stack_Name" with Proide a unique stack name
     - Replace "existing_bucket_name_in_the_same_region" with an existing S3 bcuket name in the same region where the stack will be deployed
 
-    *aws cloudformation package --template-file template.yml --s3-bucket <**existing_bucket_name_in_the_same_region**> --output-template-file packaged.template --profile <**Profile_Name**>*
+    *aws cloudformation package --template-file template.yml --s3-bucket <**existing_bucket_name_in_the_same_region**> --output-template-file    packaged.template --profile <**Profile_Name**>*
 
-    *aws cloudformation deploy --stack-name <**Stack_Name**> --template-file packaged.template  --parameter-overrides file://parameter.json --capabilities CAPABILITY_IAM --profile <**Profile_Name**>*
-5.	Check the progress of CloudFormation stack deployment in console and wait for it to finish
+    *aws cloudformation deploy --stack-name <**Stack_Name**> --template-file packaged.template --capabilities CAPABILITY_IAM --profile <**Profile_Name**>*
+4.	Check the progress of CloudFormation stack deployment in console and wait for it to finish.
+5. Execute the following AWS CLI command to upload data.
+    - Replace "DataSource_Name" with a valid adata source.
+    - Replace "DataSource_Folder_Name" with a valid adata source.
+    
+    *aws s3 cp “C:\users\<**DataSource_Name**>” s3://dojodatalake/data/<**DataSource_Folder_Name**>/
+    *aws s3 cp “C:\users\<**DataSource_Name**>” s3://dojodatalake/data/<**DataSource_Folder_Name**>/
 
