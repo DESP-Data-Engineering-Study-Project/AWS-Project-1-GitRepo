@@ -90,5 +90,6 @@ Follow the below step to deploy this pattern using CloudFormation template file 
     - Replace "DataSource_Folder_Name" with a valid adata source.
     
     *aws s3 cp “C:\users\<**DataSource_Name**>” s3://dojodatalake/data/<**DataSource_Folder_Name**>/
+    
     *aws s3 cp “C:\users\<**DataSource_Name**>” s3://dojodatalake/data/<**DataSource_Folder_Name**>/
 
