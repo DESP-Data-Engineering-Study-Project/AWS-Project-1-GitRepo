@@ -10,7 +10,7 @@ In this workshop, you will keep two data sets sales and customers in Amazon S3. 
 - [High level work flow](#High-level-work-flow)
 - [Repository Structure](#Repository-Structure)
 - [Deploy](#Deploy)
-- [Sample Workflow Execution](#Sample-Workflow-Execution-and-Notification)
+- [Documentation](#Documentation)
 
 ---
 ## Prerequisites 
@@ -97,7 +97,10 @@ Follow the below step to deploy this pattern using CloudFormation template file 
     
     *aws s3 cp “C:\users\<**DataSource_Name**>” s3://dojodatalake/data/<**DataSource_Folder_Name**>/
     
- ---        
+ ---
+ ## Documentation
+ See [Documentation](CONTRIBUTING.md#Documentation) for more information.
+  ---
  ## Test
 
 1. Once, stack deployment is completed, navigate to source folder inside S3 bucket.
