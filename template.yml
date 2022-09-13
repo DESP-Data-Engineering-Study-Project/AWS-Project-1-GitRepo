@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Metadata:
+    License: Apache-2.0
+Description: 'AWS CloudFormation Sample Template IAM_Users_Groups_and_Policies'
+Resources:
+    salesuser:
+        Type: 'AWS::IAM::User'
+        Properties:
+            UserName: salesuser
+            LoginProfile:
+                Password: Login@123
+            ManagedPolicyArns:
+                - 'arn:aws:iam::aws:policy/AmazonAthenaFullAccess'
+                - 'arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess'
+                - 'arn:aws:iam::aws:policy/AWSCloudFormationReadOnlyAccess'
+                - 'arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess'
+                - 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
+    customeruser:
+        Type: 'AWS::IAM::User'
+        Properties:
+            UserName: customeruser
+            LoginProfile:
+                Password: Login@123
+            ManagedPolicyArns:
+                - 'arn:aws:iam::aws:policy/AmazonAthenaFullAccess'
+                - 'arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess'
+                - 'arn:aws:iam::aws:policy/AWSCloudFormationReadOnlyAccess'
+                - 'arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess'
+                - 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
+    dojocrawlerrole:
+        Type: 'AWS::IAM::Role'
+        Properties:
+            AssumeRolePolicyDocument:
+                Version: '2012-10-17'
+                Statement:
+                    - {Effect: Allow, Principal: {Service: glue.amazonaws.com}, Action: 'sts:AssumeRole'}
+            RoleName: dojocrawlerrole
+            ManagedPolicyArns:
+                - 'arn:aws:iam::aws:policy/PowerUserAccess'
+    S3Bucket:
+        Type: 'AWS::S3::Bucket'
+        Properties:
+            BucketName: dojodatalake
