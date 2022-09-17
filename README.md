@@ -99,7 +99,7 @@ Follow the below step to deploy this pattern using CloudFormation template file 
     
  ---
  ## Documentation
- See [Documentation](CONTRIBUTING.md#Documentation) for more information.
+ See [Documentation](https://github.com/DESP-Data-Engineering-Study-Project/AWS-Project-21A-Lake-Formation-Data-Processing/blob/main/Documentation.xlsx#Documentation) for more information.
   ---
  ## Test
 
